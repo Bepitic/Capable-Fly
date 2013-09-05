@@ -1,0 +1,16 @@
+translate:
+ notPermission: No tienes los permisos necesarios para usar este comando.
+ enablePlugin: El plugin ha sido inicializado correctamente.
+ disableplugin: Adios :(
+ onCmdcflyOn: Empezastes a volar.
+ onCmdcflyOff: Dejastes de volar.
+ onCmdcflyhelp: Te quedan
+ onCmdcflyhelp1: minutos
+ onCmdcflyhelp2: horas 
+ onCmdcflyhelp3: dias
+ onCmdcflyhelp4: de poder volar
+ onCmdcflyhelp5: de espera para volar
+options:
+ minutesToReload: 1 
+ MinutesToAllowFly: 1440
+ MinutesToDenyFly: 10080

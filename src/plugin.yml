@@ -1,0 +1,7 @@
+name: Capable Fly
+main: capablefly.Principal
+version: 1.0.02
+commands:
+ cfly:
+  description: Te permite volar por un tiempo determinado
+  usage: /cfly (activar/desactivar) , /cfly help (para saber cuanto tiempo queda)
