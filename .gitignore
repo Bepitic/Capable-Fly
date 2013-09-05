@@ -1,0 +1,14 @@
+
+.classpath
+
+.project
+
+*.jardesc
+
+*.class
+
+bin/config.yml
+
+bin/plugin.yml
+
+*.prefs
