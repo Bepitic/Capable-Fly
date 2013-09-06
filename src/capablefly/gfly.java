@@ -5,6 +5,7 @@ import capablefly.Principal;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -55,9 +56,10 @@ public class gfly implements CommandExecutor {
 		if(args.length == 0){
 			
 			if (!sender.hasPermission("capablefly.cfly")) {
-	             sender.sendMessage(plugin.getConfig().getString("translate.notPermission"));
+	             sender.sendMessage( ChatColor.DARK_RED + plugin.getConfig().getString("translate.notPermission") );
 	             return true;
 	         }
+			
 			
 			
 			if(canfly){
@@ -71,14 +73,14 @@ public class gfly implements CommandExecutor {
 				 
 				
 			if(!(isfling)){
-				player.sendMessage(""+ plugin.getConfig().getString("translate.onCmdcflyOn"));
+				player.sendMessage(ChatColor.AQUA + plugin.getConfig().getString("translate.onCmdcflyOn"));
 				plugin.getConfig().set("users.isfling." + player.getDisplayName() , true);
 				player.setAllowFlight(true);
 				plugin.saveConfig();
 			
 			
 			}else{
-				player.sendMessage(""+ plugin.getConfig().getString("translate.onCmdcflyOff"));
+				player.sendMessage(ChatColor.AQUA + plugin.getConfig().getString("translate.onCmdcflyOff"));
 				plugin.getConfig().set("users.isfling." + player.getDisplayName() , false);
 				player.setAllowFlight(false);
 				plugin.saveConfig();
@@ -95,7 +97,7 @@ public class gfly implements CommandExecutor {
 				
 				
 				if (!sender.hasPermission("capablefly.cflyhelp")) {
-		             sender.sendMessage(plugin.getConfig().getString("translate.notPermision"));
+		             sender.sendMessage( ChatColor.DARK_RED + plugin.getConfig().getString("translate.notPermision"));
 		             
 		             return true;
 		         }
@@ -112,22 +114,22 @@ public class gfly implements CommandExecutor {
 					canf = plugin.getConfig().getString("translate.onCmdcflyhelp");
 					if(fdias != 0)
 					{
-					canf = canf + " " + fdias + plugin.getConfig().getString("translate.onCmdcflyhelp3");	
+					canf = canf + " " + fdias  + " " + plugin.getConfig().getString("translate.onCmdcflyhelp3");	
 					}
 					if(fhoras != 0)
 					{
-					canf = canf + " " + fhoras + plugin.getConfig().getString("translate.onCmdcflyhelp2");	
+					canf = canf + " " + fhoras  + " " + plugin.getConfig().getString("translate.onCmdcflyhelp2");	
 					}
 					if(fminutos != 0)
 					{
-					canf = canf + " " + fminutos + plugin.getConfig().getString("translate.onCmdcflyhelp1");	
+					canf = canf + " " + fminutos  + " " + plugin.getConfig().getString("translate.onCmdcflyhelp1");	
 					}
 					
 					canf = canf + " " + plugin.getConfig().getString("translate.onCmdcflyhelp4");
 					
 					
 					
-					player.sendMessage(""+ canf	 );
+					player.sendMessage(ChatColor.RED + canf	 );
 				}
 				else{
 					
@@ -149,12 +151,12 @@ public class gfly implements CommandExecutor {
 					
 					
 					
-					player.sendMessage(""+ cantf );
+					player.sendMessage( ChatColor.RED + cantf );
 							
 				}
 			}else if(args[0].equalsIgnoreCase("reload")){
 				if (!sender.hasPermission("capablefly.cflyreload")) {
-		             sender.sendMessage(plugin.getConfig().getString("translate.notPermision"));
+		             sender.sendMessage(  ChatColor.DARK_RED + plugin.getConfig().getString("translate.notPermision"));
 		             return true;
 		         }
 					plugin.reloadConfig();

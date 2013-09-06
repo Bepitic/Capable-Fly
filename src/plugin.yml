@@ -1,6 +1,6 @@
 name: Capable Fly
 main: capablefly.Principal
-version: 1.0.02
+version: 1.1.06
 commands:
  cfly:
   description: Te permite volar por un tiempo determinado
