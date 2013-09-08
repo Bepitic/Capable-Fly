@@ -3,10 +3,12 @@ package capablefly;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-//import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
+import capablefly.DisableFly;
 import capablefly.Principal;
 
 public class checkoneusertask extends BukkitRunnable {
@@ -17,6 +19,7 @@ private final Principal plugin;
 		this.plugin = plugin;
 		this.p = player;
 	}
+	
 	@Override
 	public void run() {
 		
@@ -36,7 +39,11 @@ private final Principal plugin;
     		{
     			plugin.getConfig().set("users.canfly." + p.getDisplayName() , false);
     			plugin.getConfig().set("users.isfling." + p.getDisplayName() , false);
-    			p.setAllowFlight(false);
+    			if(p.getAllowFlight() == true)
+    			{
+    			p.sendMessage( ChatColor.RED + plugin.getConfig().getString("translate.onCmdcflyhelp") + " 30 S."  );
+        		BukkitTask checktask = new DisableFly( p ).runTaskLater(plugin, 20*30);
+    			}
     			
     		}
     		
