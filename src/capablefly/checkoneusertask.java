@@ -25,24 +25,40 @@ private final Principal plugin;
 		
 		int minutesCanFly = plugin.getConfig().getInt("options.MinutesToAllowFly");
 		int minutesCantFly = plugin.getConfig().getInt("options.MinutesToDenyFly") + minutesCanFly;
+		int minutesFlied;
 		final Calendar cal = new GregorianCalendar();
 		final int minOfYear = cal.get(Calendar.MINUTE) + ((cal.get(Calendar.HOUR_OF_DAY) + (cal.get(Calendar.DAY_OF_YEAR) * 24))*60);
 
+        if(minOfYear > plugin.getConfig().getInt("users.minuteOfYear." + p.getDisplayName()))
+        {
+            minutesFlied = minOfYear -(plugin.getConfig().getInt("users.minuteOfYear." + p.getDisplayName()));
+        }else
+        {
+            minutesFlied = minOfYear -  525600 +(plugin.getConfig().getInt("users.minuteOfYear." + p.getDisplayName()));   
+        }
            
-    		if( (minOfYear -(plugin.getConfig().getInt("users.minuteOfYear." + p.getDisplayName()))) < minutesCanFly){
+    		if( minutesFlied < minutesCanFly){
+    			
     			plugin.getConfig().set("users.canfly." + p.getDisplayName() , true);	
-    		}else if( (minOfYear -(plugin.getConfig().getInt("users.minuteOfYear." + p.getDisplayName()))) >= minutesCantFly){
+    		
+    		}else if( minutesFlied >= minutesCantFly  ){
+    		
     			plugin.getConfig().set("users.canfly." + p.getDisplayName() , true);	
     			plugin.getConfig().set("users.settimefly." + p.getDisplayName() , true);
+    		
     		}
     		else 
     		{
+    		
     			plugin.getConfig().set("users.canfly." + p.getDisplayName() , false);
     			plugin.getConfig().set("users.isfling." + p.getDisplayName() , false);
+    			
     			if(p.getAllowFlight() == true)
     			{
-    			p.sendMessage( ChatColor.RED + plugin.getConfig().getString("translate.onCmdcflyhelp") + " 30 S."  );
-        		BukkitTask checktask = new DisableFly( p ).runTaskLater(plugin, 20*30);
+    			
+    				p.sendMessage( ChatColor.RED + plugin.getConfig().getString("translate.onCmdcflyhelp") + " 30 S."  );
+    				BukkitTask checktask = new DisableFly( p ).runTaskLater(plugin, 20*30);
+    			
     			}
     			
     		}
