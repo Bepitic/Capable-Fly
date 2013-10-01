@@ -10,7 +10,16 @@ translate:
  onCmdcflyhelp3: dias
  onCmdcflyhelp4: de poder volar
  onCmdcflyhelp5: de espera para volar
+ onCmdcflyBuy: Euros
 options:
  minutesToReload: 1 
  MinutesToAllowFly: 1440
  MinutesToDenyFly: 10080
+ ExtendsFlyTime:
+  Activate: false
+  Price: 1
+  Time: 1
+ ReducesDenyTime:
+  Activate: false
+  Price: 1
+  Time: 1
