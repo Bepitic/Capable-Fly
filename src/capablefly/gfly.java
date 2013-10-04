@@ -132,6 +132,8 @@ public class gfly implements CommandExecutor {
 					if(plugin.getConfig().getBoolean("options.ExtendsFlyTime.Activate"))
 					{
 						player.sendMessage(ChatColor.RED + "/cfly buy  -> " + plugin.getConfig().getInt("options.ExtendsFlyTime.Time") + " " + plugin.getConfig().getString("translate.onCmdcflyhelp1") + " <-> " + plugin.getConfig().getInt("options.ExtendsFlyTime.Price") + " " + plugin.getConfig().getString("translate.onCmdcflyBuy") );
+					}else{
+						player.sendMessage("asdf2");
 					}
 
 
@@ -159,9 +161,11 @@ public class gfly implements CommandExecutor {
 					player.sendMessage( ChatColor.RED + cantf );
 
 
-					if(plugin.getConfig().getBoolean("options.ReducesFlyTime.Activate"))
+					if(plugin.getConfig().getBoolean("options.ReducesDenyTime.Activate"))
 					{
-						player.sendMessage(ChatColor.RED + "/cfly buy  -> " + plugin.getConfig().getInt("options.ReducesFlyTime.Time") + " " + plugin.getConfig().getString("translate.onCmdcflyhelp1") + " <-> " + plugin.getConfig().getInt("options.ReducesFlyTime.Price") + " " + plugin.getConfig().getString("translate.onCmdcflyBuy") );
+						player.sendMessage(ChatColor.RED + "/cfly buy  -> " + plugin.getConfig().getInt("options.ReducesDenyTime.Time") + " " + plugin.getConfig().getString("translate.onCmdcflyhelp1") + " <-> " + plugin.getConfig().getInt("options.ReducesDenyTime.Price") + " " + plugin.getConfig().getString("translate.onCmdcflyBuy") );
+					}else{
+						player.sendMessage("asdf");
 					}
 
 
@@ -188,19 +192,19 @@ public class gfly implements CommandExecutor {
 						{
 							econ.bankWithdraw(player.getName(), plugin.getConfig().getInt("options.ExtendsFlyTime.Price"));
 							
-							AmpliarTiempo(player,  plugin.getConfig().getInt("options.ExtendsFlyTime.Price"));
+							AmpliarTiempo(player,  plugin.getConfig().getInt("options.ExtendsFlyTime.Price"), true);
 
 						}
 					}
 				}else
 				{
-					if(plugin.getConfig().getBoolean("options.ReducesFlyTime.Activate"))
+					if(plugin.getConfig().getBoolean("options.ReducesDenyTime.Activate"))
 					{
-						if(econ.getBalance(player.getName()) >= plugin.getConfig().getInt("options.ReducesFlyTime.Price") )
+						if(econ.getBalance(player.getName()) >= plugin.getConfig().getInt("options.ReducesDenyTime.Price") )
 						{
-							econ.bankWithdraw(player.getName(), plugin.getConfig().getInt("options.ReducesFlyTime.Price"));
+							econ.bankWithdraw(player.getName(), plugin.getConfig().getInt("options.ReducesDenyTime.Price"));
 							
-							AmpliarTiempo(player,  plugin.getConfig().getInt("options.ExtendsFlyTime.Price"));
+							AmpliarTiempo(player,  plugin.getConfig().getInt("options.ReducesDenyTime.Price"), false);
 							
 						}
 					}
@@ -217,11 +221,16 @@ public class gfly implements CommandExecutor {
 		return false;
 	}
 	
-	private void AmpliarTiempo(Player plyr, int tiempo)
+	private void AmpliarTiempo(Player plyr, int tiempo, boolean a)
 	{
 		
+		if(a)
+		{
 		plugin.getConfig().set("users.minuteOfYear."+plyr.getName(), plugin.getConfig().getInt("users.minuteOfYear."+plyr.getName()) + tiempo ) ;
-		
+		}else
+		{
+			plugin.getConfig().set("users.minuteOfYear."+plyr.getName(), plugin.getConfig().getInt("users.minuteOfYear."+plyr.getName()) - tiempo ) ;
+		}
 	}
 
 }
